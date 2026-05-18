@@ -1,16 +1,7 @@
 input.onPinPressed(TouchPin.P0, function () {
     if (is_selecting) {
-        if (Day == "Mon") {
-            showEquipment("English")
-        } else if (Day == "Tue") {
-            showEquipment("Art")
-        } else if (Day == "Wed") {
-            showEquipment("HPE")
-        } else if (Day == "Thu") {
-            showEquipment("Math")
-        } else if (Day == "Fri") {
-            showEquipment("HPE")
-        }
+        selected_subject = timetable[Day_number][0]
+        showEquipment(selected_subject)
     }
 })
 function showEquipment (subject: string) {
@@ -24,7 +15,7 @@ function showEquipment (subject: string) {
         basic.showString("Art: Sketchbook, Pencils", 70)
     }
     is_selecting = false
-    basic.showString((Day), 60)
+    basic.showString(Day, 60)
 }
 input.onButtonPressed(Button.A, function () {
     is_selecting = false
@@ -33,58 +24,81 @@ input.onButtonPressed(Button.A, function () {
         Day_number = 0
     }
     Day = Days[Day_number]
-    basic.showString((Day), 70)
+    basic.showString(Day, 70)
 })
 input.onPinPressed(TouchPin.P2, function () {
     if (is_selecting) {
-        if (Day == "Mon") {
-            showEquipment("HPE")
-        } else if (Day == "Tue") {
-            showEquipment("Math")
-        } else if (Day == "Wed") {
-            showEquipment("English")
-        } else if (Day == "Thu") {
-            showEquipment("Art")
-        } else if (Day == "Fri") {
-            showEquipment("English")
-        }
+        selected_subject3 = timetable[Day_number][2]
+        showEquipment(selected_subject3)
+    }
+})
+input.onButtonPressed(Button.AB, function () {
+    if (is_selecting) {
+        selected_subject4 = timetable[Day_number][3]
+        showEquipment(selected_subject4)
     }
 })
 input.onButtonPressed(Button.B, function () {
     is_selecting = true
     if (Day == "Mon") {
-        basic.showString("Eng Math HPE", 75)
+        basic.showString("1:Eng 2:Math 3:HPE 4:Eng", 75)
     } else if (Day == "Tue") {
-        basic.showString("Art Eng Math", 75)
+        basic.showString("1:Art 2:Eng 3:Math 4:HPE", 75)
     } else if (Day == "Wed") {
-        basic.showString("HPE Art Eng", 75)
+        basic.showString("1:HPE 2:Art 3:Eng 4:Math", 75)
     } else if (Day == "Thu") {
-        basic.showString("Math HPE Art", 75)
+        basic.showString("1:Math 2:HPE 3:Art 4:Eng", 75)
     } else if (Day == "Fri") {
-        basic.showString("HPE Math Eng", 75)
+        basic.showString("1:HPE 2:Math 3:Eng 4:Art", 75)
     }
 })
 input.onPinPressed(TouchPin.P1, function () {
     if (is_selecting) {
-        if (Day == "Mon") {
-            showEquipment("Math")
-        } else if (Day == "Tue") {
-            showEquipment("English")
-        } else if (Day == "Wed") {
-            showEquipment("Art")
-        } else if (Day == "Thu") {
-            showEquipment("HPE")
-        } else if (Day == "Fri") {
-            showEquipment("Math")
-        }
+        selected_subject2 = timetable[Day_number][1]
+        showEquipment(selected_subject2)
     }
 })
+let selected_subject2 = ""
+let selected_subject4 = ""
+let selected_subject3 = ""
+let selected_subject = ""
+let is_selecting = false
+let Day_number = 0
 let Day = ""
 let Days: string[] = []
-let Day_number = 0
-let is_selecting = false
-is_selecting = false
-Day_number = 0
+let timetable: string[][] = []
+timetable = [
+[
+"English",
+"Math",
+"HPE",
+"English"
+],
+[
+"Art",
+"English",
+"Math",
+"HPE"
+],
+[
+"HPE",
+"Art",
+"English",
+"Math"
+],
+[
+"Math",
+"HPE",
+"Art",
+"English"
+],
+[
+"HPE",
+"Math",
+"English",
+"Art"
+]
+]
 Days = [
 "Mon",
 "Tue",
@@ -93,4 +107,4 @@ Days = [
 "Fri"
 ]
 Day = Days[Day_number]
-basic.showString((Day), 60)
+basic.showString(Day, 60)
